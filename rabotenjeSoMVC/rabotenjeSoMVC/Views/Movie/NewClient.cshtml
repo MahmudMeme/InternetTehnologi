@@ -1,0 +1,45 @@
+﻿
+@model rabotenjeSoMVC.Models.Clint
+@{
+    ViewBag.Title = "NewClient";
+}
+
+<h2>new client</h2>
+
+@using (Html.BeginForm("InsertNewClient", "Movie"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age, new { @class = " form-controler", type = "number" })
+        @Html.ValidationMessageFor(m => m.Age)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone, new { @class = " form-controler" })
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address, new { @class = " form-controler" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ClientCard)
+        @Html.TextBoxFor(m => m.ClientCard, new { @class = " form-controler" })
+        @Html.ValidationMessageFor(m => m.ClientCard)
+    </div>
+
+    <button type="submit" class="btn btn-default">Save</button>
+
+
+}
+
+
