@@ -1,0 +1,21 @@
+﻿@model Lab2A.Models.EventModel
+@{
+    ViewBag.Title = "EditEvent";
+}
+
+<h2>EditEvent</h2>
+
+@using (Html.BeginForm("EditEvent", "Event"))
+{
+    <div>
+        @Html.Label("Event Name")
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-constol" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div>
+        @Html.Label("Event Location")
+        @Html.TextBoxFor(m => m.Location, new { @class = "form-constol" })
+        @Html.ValidationMessageFor(m => m.Location)
+    </div>
+    <button type="submit">Save</button>
+}
