@@ -18,7 +18,7 @@ namespace Lab2A.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View("ShowAllEvents", evetList);
         }
         public ActionResult ShowAllEvents()
         {
@@ -27,9 +27,8 @@ namespace Lab2A.Controllers
         }
         public ActionResult EditEvent(int id)
         {
-
-            EventModel model = evetList.ElementAt(id - 1);
-            return View(model);
+            var ev = evetList.Find(e => e.id == id);
+            return View(ev);
         }
         [HttpPost]
         public ActionResult EditEvent(EventModel model)
@@ -67,12 +66,25 @@ namespace Lab2A.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpNotFound();
+                return View("AddNewEvent");
+                // return HttpNotFound();
             }
             else
             {
-                model.id = evetList.Count + 1;
-                evetList.Add(model);
+                try
+                {
+                    var last = evetList.Last();
+                    model.id = last.id + 1;
+                    evetList.Add(model);
+                }
+
+                catch (Exception ex)
+                {
+                    model.id = 1;
+                    evetList.Add(model);
+
+                }
+
                 return View("ShowAllEvents", evetList);
             }
         }
