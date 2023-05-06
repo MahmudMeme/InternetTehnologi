@@ -1,0 +1,19 @@
+﻿@model rabotenjeSoBaza.Models.ClientMovie
+@{
+    ViewBag.Title = "InsertNewClient";
+}
+
+<h2>InsertNewClient for @Model.movie.Name</h2>
+
+@using (Html.BeginForm("InsertClientMovie", "Movies"))
+{
+    <div class="form-group">
+        @Html.DropDownListFor(m => m.ClientId, new SelectList(Model.ClientList, "Id", "Name"), new { @class = "form-control" })
+        @Html.HiddenFor(m => m.MoveiId)
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="=btn btn-default">add client for movie</button>
+    </div>
+}
+

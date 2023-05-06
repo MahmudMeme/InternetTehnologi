@@ -1,0 +1,20 @@
+﻿@model List<Lab2A.Models.EventModel>
+@{
+    ViewBag.Title = "ShowAllEvents";
+}
+
+<h2>ShowAllEvents</h2>
+<table style="border: 1px solid black" width="300px">
+    @{
+        foreach (var ev in Model)
+        {
+            <tr style="border: 1px solid black">
+                <td style="border: 1px solid black" width="30px" height="10px">@ev.id</td>
+                <td style="border: 1px solid black" width="30px" height="10px">@ev.Name</td>
+                <td style="border: 1px solid black" width="30px" height="10px">@ev.Location</td>
+                <td style="border: 1px solid black" width="30px" height="10px"> @Html.ActionLink("Edit","EditEvent",new {id=ev.id}) </td>
+                <td style="border: 1px solid black" width="30px" height="10px"> @Html.ActionLink("Delete","DeleteEvent",new {id=ev.id}) </td>
+            </tr>
+        }
+    }
+</table>
