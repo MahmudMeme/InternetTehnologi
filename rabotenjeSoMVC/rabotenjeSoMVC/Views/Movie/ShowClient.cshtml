@@ -1,0 +1,16 @@
+﻿@model rabotenjeSoMVC.Models.Clint
+@{
+    ViewBag.Title = "ShowClient";
+}
+@if (Model.Age > 18)
+{
+    <h2>name: @Model.Name</h2>
+    <h2>card: @Model.ClientCard</h2>
+    <h2>Phone: @Model.Phone</h2>
+    <h2>address: @Model.Address</h2>
+}
+else
+{
+    <h1 style="color:red"> liceto e pomalo od 18 godini</h1>
+}
+

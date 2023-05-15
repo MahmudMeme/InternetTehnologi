@@ -1,0 +1,35 @@
+﻿@model rabotenjeSoMVC.Models.Movie
+@{
+    ViewBag.Title = "NewMovie";
+}
+
+<h2>new movie</h2>
+
+@using (Html.BeginForm("InsertNewMovie", "Movie"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.reating)
+        @Html.TextBoxFor(m => m.reating, new { @class = " form-controler", type = "number" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ImageUrl)
+        @Html.TextBoxFor(m => m.ImageUrl, new { @class = " form-controler" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DonwlaudUrl)
+        @Html.TextBoxFor(m => m.DonwlaudUrl, new { @class = " form-controler" })
+    </div>
+
+    <button type="submit" class="btn btn-default">Save</button>
+
+
+}
+

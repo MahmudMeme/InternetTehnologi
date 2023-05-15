@@ -1,0 +1,22 @@
+﻿@model rabotenjeSoMVC.Models.MovieRentals
+@{
+    ViewBag.Title = "Random";
+}
+
+<h2>movie name: @Model.movie.Name</h2>
+
+<h4> movie reataing; @Model.movie.reating </h4>
+
+<img src="@Model.movie.ImageUrl" width="300px" height="200px"/>
+
+<ul>
+    <h3>klinti koi go rentale filmov</h3>
+    @{
+        int i = 0;
+        foreach (var client in Model.clintsList)
+        {
+            <li> <a href="/Movie/ShowClient/@i">@client.Name,  @client.ClientCard</a></li>
+            i++;
+        }
+    }
+</ul>

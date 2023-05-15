@@ -1,0 +1,67 @@
+﻿@model rabotenjeSoBaza.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DonwlaudUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonwlaudUrl)
+        </dd>
+
+        <dt>
+@*            <img src="~/Models/Movie.ImageUrl" />
+*@
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reating)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <ul>
+        <h4>Clients that whached this movie</h4>
+        @foreach (var client in Model.clientList)
+        {
+            <li>
+                <a href="/Clints/Details/@client.Id">@client.Name,  @client.Age</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<a href="/Movies/InsertNewClient/@Model.Id">insert client to the movie</a>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
