@@ -1,0 +1,39 @@
+﻿@model baziNaPodatoci.Models.Doctor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Doctor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+
+<a href="/Doctors/InsertNewPatient/@Model.Id">Add patient for this docotor</a>
+
+<ul>
+    <h2>pacienti za doktorov</h2>
+    @foreach (var patient in Model.PatientsList)
+    {
+        <li>
+            <a href="/Patients/Details/@patient.Id">@patient.Name</a>
+
+        </li>
+    }
+</ul>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
