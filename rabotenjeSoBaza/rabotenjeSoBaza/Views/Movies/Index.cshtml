@@ -9,44 +9,78 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DonwlaudUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.reating)
-        </th>
-        <th></th>
-    </tr>
+<table id="MoviesTabel" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonwlaudUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.reating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DonwlaudUrl)
-        </td>
-        <td>
-            <img src="@item.ImageUrl" style="max-width:120px"/>
-           
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.reating)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonwlaudUrl)
+                </td>
+                <td>
+                    <img src="@item.ImageUrl" style="max-width:120px" />
 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.reating)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <button movie-id="@item.Id" class="btn-link js-delete">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            var tabel = $("#MoviesTabel").DataTable();
+            $("#MoviesTabel .js-delete").on("click", function () {
+                var buuton = $(this)
+                bootbox.confirm("are you sure?", function (rezultat) {
+                    if (rezultat) {
+                        $.ajax({
+                            url: "/Movies/Delete/" + buuton.attr("movie-id"),
+                            method: "GET",
+                            success: function () {
+                                tabel.row(buuton.parents("tr")).remove().draw();
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                })
+            })
+        });
+    </script>
+}

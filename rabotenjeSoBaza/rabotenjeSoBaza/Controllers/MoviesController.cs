@@ -10,10 +10,11 @@ using rabotenjeSoBaza.Models;
 
 namespace rabotenjeSoBaza.Controllers
 {
+    [Authorize(Roles ="Administrator,Editor")]
     public class MoviesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        [AllowAnonymous]
         // GET: Movies
         public ActionResult Index()
         {
@@ -57,7 +58,7 @@ namespace rabotenjeSoBaza.Controllers
 
             return View(movie);
         }
-
+        
         // GET: Movies/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -89,25 +90,7 @@ namespace rabotenjeSoBaza.Controllers
             return View(movie);
         }
 
-        // GET: Movies/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = db.MovieDB.Find(id);
-            if (movie == null)
-            {
-                return HttpNotFound();
-            }
-            return View(movie);
-        }
-
-        // POST: Movies/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             Movie movie = db.MovieDB.Find(id);
             db.MovieDB.Remove(movie);
